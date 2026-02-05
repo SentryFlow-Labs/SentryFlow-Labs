@@ -1,4 +1,4 @@
-## Hi there 👋
+[![SentryFlow Auto-Pilot](https://github.com/SentryFlow-Labs/SentryFlow-Labs/actions/workflows/ghost_scout.yml/badge.svg)](https://github.com/SentryFlow-Labs/SentryFlow-Labs/actions/workflows/ghost_scout.yml)## Hi there 👋
 
 <!--
 **SentryFlow-Labs/SentryFlow-Labs** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
