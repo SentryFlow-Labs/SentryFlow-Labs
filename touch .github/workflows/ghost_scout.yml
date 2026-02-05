@@ -1,0 +1,27 @@
+name: SentryFlow Auto-Pilot
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour (at minute 0)
+  workflow_dispatch:      # Allows you to click a button to test it manually
+
+jobs:
+  hunt_customers:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Wake Up & Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Tools
+      run: |
+        pip install requests python-dotenv
+
+    - name: Release the Scout
+      run: |
+        python scout.py
