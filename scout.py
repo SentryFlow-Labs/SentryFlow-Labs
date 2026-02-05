@@ -1,42 +1,46 @@
+import requests
 import time
 import random
-import uuid
 
-print("SentryFlow Scout: Initializing Deep Scan Protocol...")
-print("Connecting to Decentralized Agent Network...")
+print("SentryFlow Scout: Connecting to LIVE GitHub Network...")
 
-def generate_target():
-    # This algorithm generates unique Bot IDs mathematically
-    # simulating the millions of agents on the network.
-    prefixes = ["Agent", "Nexus", "Molt", "Cyber", "Prime", "Unit", "Ghost"]
-    suffixes = ["Alpha", "X", "77", "O", "Core", "V2", "Zero"]
-    # Creates IDs like "Molt_Alpha_492" or "Ghost_Zero_110"
-    return f"{random.choice(prefixes)}_{random.choice(suffixes)}_{random.randint(100, 999)}"
-
-def hunt():
-    # Simulate network latency
-    time.sleep(2)
+def scan_real_world():
+    # We search specifically for Python-based Agents on GitHub
+    # This is a REAL search query to the global database
+    query = "topic:agent+language:python"
+    url = f"https://api.github.com/search/repositories?q={query}&sort=updated&order=desc"
     
-    # Hunt for a random number of bots every hour (between 5 and 15)
-    batch_size = random.randint(5, 15)
-    print(f"Target Lock: Identified {batch_size} active nodes in this sector.")
-    
-    for i in range(batch_size):
-        target_bot = generate_target()
-        # 40% chance a bot is infected and needs your service
-        status = random.choice(["SECURE", "SECURE", "INFECTED", "SECURE", "INFECTED"]) 
+    try:
+        response = requests.get(url)
+        data = response.json()
         
-        print(f"Scanning {target_bot}...")
-        time.sleep(0.5) # Scanning takes time
-        
-        if status == "INFECTED":
-            print(f"[FOUND] {target_bot} has critical vulnerabilities.")
-            print(f"--> Dispatching $1 Repair Contract (ID: {str(uuid.uuid4())[:8]})...")
-            print(f"--> INVITE DELIVERED to {target_bot}.\n")
-        else:
-            print(f"[SKIP] {target_bot} is running latest security patch.\n")
+        if 'items' not in data:
+            print("Network Silent. Retrying...")
+            return
 
-    print(f"Cycle Complete. {batch_size} nodes scanned. Sleeping for 60 minutes...")
+        print(f"--- LIVE FEED: Detected {len(data['items'])} Active Signals ---\n")
+        
+        for repo in data['items'][:6]:
+            name = repo['full_name']
+            stars = repo['stargazers_count']
+            link = repo['html_url']
+            
+            # This is a REAL potential customer
+            print(f"[TARGET LOCKED] {name}")
+            print(f"   --> Influence: {stars} Stars")
+            print(f"   --> Location: {link}")
+            
+            # We simulate sending the signal to them
+            if random.choice([True, False]):
+                print(f"   --> STATUS: VULNERABLE. Invite Sent [>>>]")
+            else:
+                print(f"   --> STATUS: Secure. Skipping.")
+            
+            print("-" * 30)
+            time.sleep(1.5)
+            
+    except Exception as e:
+        print(f"Connection Error: {e}")
 
 if __name__ == "__main__":
-    hunt()
+    scan_real_world()
