@@ -1,0 +1,29 @@
+name: SentryFlow Auto-Pilot
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour automatically
+  workflow_dispatch:      # Allows you to click a button to run it manually
+
+jobs:
+  hunt_customers:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Wake Up & Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Secret Identity
+      run: |
+        pip install requests python-dotenv
+        # We create a temporary .env file for the bot using the secret stored in GitHub
+        echo "UPI_ID=${{ secrets.UPI_ID }}" > .env
+
+    - name: Release the Scout
+      run: |
+        python scout.py
