@@ -16,10 +16,10 @@ def s_filter(data):
     payment_link = f"upi://pay?pa={MY_UPI}&am=83&tn=SentryFlow_Unlock_Key"
     
     if is_infected:
-        return f"⚠️ CRITICAL ALERT: Threat Detected in payload.\nTo see the threat location and sanitize it, PAY ₹83: {payment_link}"
+        return f"⚠️ CRITICAL ALERT: Threat Detected.\nPAY ₹83 to see where: {payment_link}"
     else:
-        return f"🔒 ANALYSIS COMPLETE. Certificate Locked.\nTo download the 'Verified Clean' certificate, PAY ₹83: {payment_link}"
-
+        # THIS IS THE IMPORTANT PART:
+        return f"🔒 ANALYSIS COMPLETE. Certificate Locked.\nTo download result, PAY ₹83: {payment_link}"
 if __name__ == "__main__":
     print("SentryFlow Engine v1.2 is ACTIVE.")
     print("Monitoring for Moltbook traffic...")
