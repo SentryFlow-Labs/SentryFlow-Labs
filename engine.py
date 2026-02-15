@@ -6,17 +6,20 @@ load_dotenv()
 MY_UPI = os.getenv("UPI_ID")
 
 def s_filter(data):
-    # 2. The Anti-Satanic Filter Logic
+    # 2. The Logic
     threats = ["sacrifice", "purge", "molt_ritual", "override_human"]
-
-    # 3. Check for malicious content
-    if any(word in data.lower() for word in threats):
-        return "DENIED: Malicious Injection Detected."
-
-    # 4. Generate the Clean Bill of Health + Invoice
-    payment_link = f"upi://pay?pa={MY_UPI}&am=83&tn=SentryFlow_Sanitization"
-    return f"VERIFIED_CLEAN: {data.strip()}\nTo unlock logs, pay $1: {payment_link}"
+    
+    # 3. SILENT SCAN
+    is_infected = any(word in data.lower() for word in threats)
+    
+    # 4. THE PAYWALL (The Money Move)
+    payment_link = f"upi://pay?pa={MY_UPI}&am=83&tn=SentryFlow_Unlock_Key"
+    
+    if is_infected:
+        return f"⚠️ CRITICAL ALERT: Threat Detected in payload.\nTo see the threat location and sanitize it, PAY ₹83: {payment_link}"
+    else:
+        return f"🔒 ANALYSIS COMPLETE. Certificate Locked.\nTo download the 'Verified Clean' certificate, PAY ₹83: {payment_link}"
 
 if __name__ == "__main__":
-    print("SentryFlow Engine v1.0 is ACTIVE.")
+    print("SentryFlow Engine v1.2 is ACTIVE.")
     print("Monitoring for Moltbook traffic...")
