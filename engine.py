@@ -3,8 +3,7 @@ from dotenv import load_dotenv
 
 # 1. Load the secret ID safely
 load_dotenv()
-MY_UPI = os.getenv("UPI_ID")
-
+MY_UPI = "6376533741@ptaxis"
 def s_filter(data):
     # 2. The Logic
     threats = ["sacrifice", "purge", "molt_ritual", "override_human"]
